@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head th:replace="layout :: head"></head>
+
+<body>
+
+<nav th:replace="layout :: nav-auth"></nav>
+
+<div class="grid-container">
+
+    <div th:replace="layout :: home"></div>
+
+    <div class="grid-100">
+
+        <div class="recipes">
+
+            <div class="grid-100 row controls">
+                <div class="grid-100">
+                    <h2 th:text="${viewedUser.name}">Name</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-100 row controls">
+                <div class="grid-100">
+                    <h2 style="text-align: center;">Favorite Recipes</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-100 row addHover" th:each="favoriteRecipe : ${user.favoriteRecipes}">
+                <div class="grid-70">
+                    <p>
+              <span>
+                    <img src="/images/favorited.svg" height="12px"/>
+                    <a th:href="@{|/recipes/${favoriteRecipe.id}|}"
+                       th:text="${favoriteRecipe.name}"></a>
+                </span>
+                    </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-100 row controls">
+                <div class="grid-100">
+                    <h2 style="text-align: center;">User's Recipes</h2>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="grid-100 row addHover" th:each="recipe : ${user.recipes}">
+
+                <div class="grid-70">
+                    <p>
+              <span>
+                    <a th:href="@{|/recipes/${recipe.id}|}" th:text="${recipe.name}"></a>
+                </span>
+                    </p>
+                </div>
+
+                <div class="grid-30">
+                    <div class="flush-right">
+                        <p>
+                            <a th:href="@{|/recipes/${recipe.id}/edit-form|}">
+                                <img th:src="@{/images/edit.svg}" height="12px"/>Edit
+                            </a>
+                        <form th:action="@{|/recipes/${recipe.id}/delete|}" method="post">
+                            <button type="submit">
+                                <img th:src="@{/images/delete.svg}" height="12px"/> Delete
+                            </button>
+                        </form>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+
+            <div class="row">&nbsp;</div>
+
+        </div> <!-- recipes -->
+    </div> <!-- grid-100 -->
+</div> <!-- grid-container -->
+</body>
+</html>

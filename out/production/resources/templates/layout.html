@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:fragment="head">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>My Recipes</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" th:href="@{/css/unsemantic-grid-responsive.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+
+<nav th:fragment="nav-unknown">
+    <a th:href="@{/signup}">
+        sign-up
+    </a>
+    &bull;
+    <a th:href="@{/login}">
+        login
+    </a>
+</nav>
+
+<nav th:fragment="nav-auth">
+    <a th:href="@{/profile}" th:text="${user.name}">
+        Chandra S.
+    </a>
+    &bull;
+    <form th:action="@{/logout}" method="post" style="display: inline">
+        <button type="submit">logout</button>
+    </form>
+</nav>
+
+<div th:fragment="home">
+    <div class="grid-100">
+        <a th:href="@{/}">
+            <h1>
+                <img th:src="@{/images/chefbot.svg}" height="60px">
+                <br>
+                My Recipes
+            </h1>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="favorite">
+    <form th:action="@{|/recipes/${recipe.id}/favorite|}" method="post" style="display:inline">
+        <button type="submit">
+            <img th:src="${recipe.isFavorite(user)} ? @{/images/favorited.svg} : @{/images/favorite.svg}"
+                 style="height: 15px;">
+        </button>
+    </form>
+</div>
+
+<div th:fragment="scripts">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</div>
+
+</body>
+
+</html>
